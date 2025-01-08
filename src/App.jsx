@@ -1,6 +1,7 @@
 import './App.css'
 import axios from "axios";
 import {useEffect, useState} from "react";
+import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
 
 function App() {
     const [pokemon, setPokemon] = useState({});
@@ -27,19 +28,9 @@ function App() {
     return (
         <>
             <h1>Pokemon</h1>
-            {error ? <h2>Er ging iets fout met het ophalen probeer opniew!</h2> : <article>
-                <h2>{pokemon.name}</h2>
-                <img src={pokemon.sprites?.front_default} alt='dito'/>
-                <h3>Moves:{pokemon.moves?.length}</h3>
-                <h3>Weight:{pokemon.weight}</h3>
-                <h3>Albilities:</h3>
-                <ul>{pokemon.abilities?.map((poke)=>{
-                    return ( <li key={poke.ability.name}>
-                    <p>{poke.ability.name} </p>
-                    </li>
-                    )
-                } )}</ul>
-            </article>}
+            {error ? <h2>Er ging iets fout met het ophalen probeer opniew!</h2> :
+                <PokemonCard name={pokemon.name} img={pokemon.sprites?.front_default} moves={pokemon.moves?.length} weight={pokemon.weight} abilities={pokemon.abilities}/>
+            }
 
         </>
     )
